@@ -1,0 +1,23 @@
+Steps in the given order:
+
+1.Choose your Oauth provider, in my case i use github to act as one.
+2.Every Oauth service contains an Authorization Server and a Resource Server.
+3.Resource Server redirect happens with Mulesoft API Manager
+4.goto api manager --> apply policy --> Select "OAuth2.0 using external provider" ; check Pic2
+5.You also need to make sure the Api Auto Discovery id is activated.
+6.Pass your API ID in the global configurations by editing Global Elements in Mule API
+7.Once your application is configured for auto discovery, the api policies can be applied.
+8.Here, postman acts as your client and GitHub acts as your authorization server
+9.Goto postman -->  check Pic1
+10. Once you follow the given procedure in Pic1. Then an Access_Token will be granted.
+11.Note: All of this happens before even hitting the send request button to the Api.
+12.In this process the 'Authorization URL' is called and Implicity an Authorization Code comes as a response
+which is not visible.
+13.Before all this, first we need to create a new Oauth App in github --> setting --> devleopers settings
+14.Add the Applications details as shown in Pic3.
+15.When Postman makes an implicit request when pressed "Request Token", the github Oauth app replies back with an Authorization Code, later this Code is used, to hit the 'Access Token Url' given in the postman with the relavant client id and secret configured.
+16.Postman gives a prompt "whether to Authorize the Client Postman with its request", ans we use our password to do that.
+17.Next we use this token to hit the API, and when we do that, the API Manager will send the access token acquired to the 'Access Token Validation URl'
+18.We do not have an official Access_Token Validation Url, so accessing any one of the resources will do an implicit validation
+
+OAuth2 is primarily recognised as Access Delegation Framework, (not a protocol)
